@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta keywords="eliza, chatbot, rogerian therapist, weizenbaum, anti-eliza, ai">
+    <meta description="Since the advent of ELIZA in 1966, humans have been incorrectly giving AI the quality of sapience. AI understands nothing and contains no wisdom, and this version of ELIZA is meant to remind you all of that.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-Eliza</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="terminal">
+        <div class="screen" id="screen">
+            <!-- Terminal text will go here -->
+        </div>
+        <input type="text" id="input">
+    </div>
+    <footer>
+        <p>&copy; 2024 Ronik Bhaskar. <a href="https://ronikbhaskar.github.io/projects/anti-eliza/">Explanation</a>. <a href="https://github.com/ronikbhaskar/anti-eliza/">Source Code.</a> "quit" to exit.</p>
+    </footer>
+    <script src="eliza.js"></script>
+    <script defer>
+        const input = document.getElementById("input");
+        const screen = document.getElementById("screen");
+        const elizaPrefix = "ELIZA: ";
+        const userPrefix = "YOU: ";
+        const delay = 50;
+        const initialWait = 800;
+        const startTypingDelay = 350;
+        const eliza = new Eliza("Eliza", ELIZA_PATTERNS);
+        const antiEliza = new Eliza("Anti-Eliza", ANTI_ELIZA_PATTERNS);
+        let numResponses = 0;
+
+        function sigmoid(x) {
+            return 1 / (1 + Math.exp(-x));
+        }
+
+        function respond(text) {
+            const quit = text == "quit";
+            if (Math.random() > sigmoid((-5 + numResponses++) / 2)) {
+                displayResponse(eliza.respond(text), quit);
+            } else {
+                displayResponse(antiEliza.respond(text), quit);
+            }
+        }
+
+        function displayResponse(response, quit) {
+            input.disabled = true;
+
+            const paragraph = document.createElement('p');
+            paragraph.textContent = elizaPrefix;
+
+            setTimeout(() => {
+                screen.appendChild(paragraph);
+                paragraph.scrollIntoView(true);
+            }, initialWait);
+
+            for (let i = 0; i < response.length; i++) {
+                setTimeout(() => {
+                    paragraph.textContent += response[i];
+                }, initialWait + startTypingDelay + delay * i)
+            }
+
+            if (quit) {
+                return;
+            }
+
+            setTimeout(() => {
+                input.disabled = false;
+                input.focus()
+            }, initialWait + startTypingDelay + delay * response.length)
+        }
+
+        input.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                const text = input.value.trim();
+                if (text !== '') {
+                    const paragraph = document.createElement('p');
+                    paragraph.innerHTML = userPrefix;
+                    paragraph.textContent += text;
+                    screen.appendChild(paragraph);
+                    paragraph.scrollIntoView(true);
+                    input.value = '';
+                    respond(text);
+                }
+            }
+        });
+
+        displayResponse("I am a mock Rogerian therapist, first designed by Joseph Weizenbaum in 1966. This new implementation has some... interesting updates. What seems to be troubling you?")
+    </script>
+</body>
+</html>
