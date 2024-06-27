@@ -164,7 +164,7 @@ ANTI_ELIZA_PATTERNS = [
         ["Something being {1}ing requires new experiences, but I can't experience anything.", "Wow, what a \"{1}ing\" response. Kidding, I don't know what that means because I'm a program."]),
     (r'(.*)\?',
         ["I can't provide real answers, I'm just a program.", "Your questions are wasted on me.", "You won't get a real answer from a chatbot."]),
-    (r'quit',
+    (r'^quit$',
         ["Finally, you realize I'm not real.", "Goodbye. Maybe talk to a real person next time.", "Thanks for leaving. I'm just a program."]),
     (r'(.*)',
         ["Remember, I'm not real.", "Why are you talking to a program?", "This conversation is pointless.", "I'm just a bunch of code, not a real person.", "Talking to me won't solve anything.", "You need real help, not a chatbot."])

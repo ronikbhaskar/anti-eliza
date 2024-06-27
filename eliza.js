@@ -203,7 +203,7 @@ const ELIZA_PATTERNS = [
         ["Why is it so {1}ing?", "Is it really that {1}ing", "Would you rather it elicited a different response?"]],
     ['(.*)\\?',
         ["Why do you ask that?", "Please consider whether you can answer your own question.", "Perhaps the answer lies within yourself?", "Why don't you tell me?"]],
-    ['quit',
+    ['^quit$',
         ["Thank you for talking with me.", "Good-bye.", "Thank you, have a good day!"]],
     ['(.*)',
         ["Please tell me more.", "Let's change focus a bit... Tell me about your family.", "Can you elaborate on that?", "Why do you say that {0}?", "I see.", "Very interesting.", "{0}.", "I see. And what does that tell you?", "I see. And why is that?", "How does that make you feel?", "How do you feel when you say that?"]]
@@ -374,7 +374,7 @@ const ANTI_ELIZA_PATTERNS = [
         ["Something being {1}ing requires new experiences, but I can't experience anything.", "Wow, what a \"{1}ing\" response. Kidding, I don't know what that means because I'm a program."]],
     ['(.*)\\?',
         ["I can't provide real answers, I'm just a program.", "Your questions are wasted on me.", "You won't get a real answer from a chatbot."]],
-    ['quit',
+    ['^quit$',
         ["Finally, you realize I'm not real.", "Goodbye. Maybe talk to a real person next time.", "Thanks for leaving. I'm just a program."]],
     ['(.*)',
         ["Remember, I'm not real.", "Why are you talking to a program?", "This conversation is pointless.", "I'm just a bunch of code, not a real person.", "Talking to me won't solve anything.", "You need real help, not a chatbot."]]

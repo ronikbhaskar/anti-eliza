@@ -164,7 +164,7 @@ ELIZA_PATTERNS = [
         ["Why is it so {1}ing?", "Is it really that {1}ing", "Would you rather it elicited a different response?"]),
     (r'(.*)\?',
         ["Why do you ask that?", "Please consider whether you can answer your own question.", "Perhaps the answer lies within yourself?", "Why don't you tell me?"]),
-    (r'quit',
+    (r'^quit$',
         ["Thank you for talking with me.", "Good-bye.", "Thank you, have a good day!"]),
     (r'(.*)',
         ["Please tell me more.", "Let's change focus a bit... Tell me about your family.", "Can you elaborate on that?", "Why do you say that {0}?", "I see.", "Very interesting.", "{0}.", "I see. And what does that tell you?", "I see. And why is that?", "How does that make you feel?", "How do you feel when you say that?"])
