@@ -58,6 +58,7 @@ input {
     margin-top: auto;
     color: #999;
     padding: 10px 0;
+    border: none;
 }
 
 @keyframes jitter {
